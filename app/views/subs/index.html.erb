@@ -1,2 +1,11 @@
-<h1>Reddit/h1>
+<h1>Reddit</h1>
+ 
+<ul>
+  <% @subs.each do |sub| %>
+    <li><%= link_to sub.name, sub %></li>
+    
 
+  <% end %>
+</ul>
+
+<%= link_to 'Create new sub', new_sub_path %>
