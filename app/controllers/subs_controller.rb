@@ -1,10 +1,12 @@
 class SubsController < ApplicationController
+  
+  before_action :find_sub, only: [:show, :update, :edit, :destroy]
+  
   def index
     @subs = Sub.all
   end
 
   def show
-    @sub = Sub.find(params[:id])
   end
 
   def new
@@ -22,13 +24,11 @@ class SubsController < ApplicationController
   end
 
   def edit
-    @sub = Sub.find(params[:id])
   end
 
   def update
-    @sub = Sub.find(params[:id])
 
-    if @sub.update(subs_params)
+    if @sub.update(sub_params)
       redirect_to subs_path
     else
       render :edit
@@ -36,17 +36,19 @@ class SubsController < ApplicationController
   end
 
   def destroy
-    Sub.find(params[:id]).destroy
+    @sub.destroy
     redirect_to subs_path
   end
 
-  
+
   private
 
     def sub_params
       params.require(:sub).permit(:name)
     end
 
-
+    def find_sub
+      @sub = Sub.find(params[:id])
+    end
 
 end
