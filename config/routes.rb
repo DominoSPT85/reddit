@@ -5,4 +5,7 @@ Rails.application.routes.draw do
     resources :topics
   end
 
+  resources :topics do
+    resources :comments
+  end
 end
